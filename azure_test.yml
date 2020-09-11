@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  collections:
+    - azure.azcollection
+  tasks:
+    - name: Get vm info
+      azure_rm_virtualmachine_info:
+        resource_group: rg-awxdev
+        subscription_id: xxxx-xxxxxxxx-xxxxx
+        name: testvm01
+        auth_source: msi
+      register: output
+    - debug:
+        var: output
